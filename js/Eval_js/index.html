@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ma routine quotidienne</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body id="vanta-bg">
+        <h1>🧼 Ma routine quotidienne</h1>
+
+        <section id="form-section">
+            <img id="chuck-icon" src="images/chuck.png" alt="Chuck Norris" style="display: none; height: 40px; vertical-align: middle; margin-right: 10px;">
+            <input type="text" id="activity-input" placeholder="Ajouter une activité..." />
+
+            <select id="time-select">
+                <option value="matin">Matin</option>
+                <option value="apres-midi">Après-midi</option>
+                <option value="soir">Soir</option>
+            </select>
+
+            <button id="add-btn">Ajouter</button>
+            <button id="suggest-btn">Suggestion 🔮</button>
+        </section>
+
+        <section id="filters">
+            <button data-filter="all">Toutes</button>
+            <button data-filter="matin">Matin</button>
+            <button data-filter="apres-midi">Après-midi</button>
+            <button data-filter="soir">Soir</button>
+        </section>
+
+        <section id="routine">
+            <div class="routine-part" data-time="matin">
+                <h2>🌅 Matin</h2>
+                <ul class="activity-list" id="matin-list"></ul>
+            </div>
+            <div class="routine-part" data-time="apres-midi">
+                <h2>🌤️ Après-midi</h2>
+                <ul class="activity-list" id="apres-midi-list"></ul>
+            </div>
+            <div class="routine-part" data-time="soir">
+                <h2>🌙 Soir</h2>
+                <ul class="activity-list" id="soir-list"></ul>
+            </div>
+        </section>
+
+    <!--Three Vanta-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <!--Effet du cloud-->
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
