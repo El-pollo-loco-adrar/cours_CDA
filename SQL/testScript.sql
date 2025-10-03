@@ -83,6 +83,8 @@ INSERT INTO seller (age, day_of_born, lastname_seller, firstname_seller, email)
     VALUES (54, "1970-12-12", "Henry", "Thierry", "tt@gmail.com");
 INSERT INTO seller (age, day_of_born, lastname_seller, firstname_seller, email) 
     VALUES (54, "1970-12-12", "L'bogoss", "Maurice", "t@gmail.com");
+INSERT INTO seller (age, day_of_born, lastname_seller, firstname_seller, email) 
+    VALUES (20, "2005-12-12", "House", "Antoine", "aaa@gmail.com");
     
 INSERT INTO article (name_article, price)
 VALUES ("dentifrice", 10), 
@@ -314,3 +316,58 @@ SELECT name_article, group_concat(price SEPARATOR" / ") FROM article GROUP BY na
 
 SELECT id_ticket, group_concat(id_article) FROM ticket_article GROUP BY id_ticket;
 SELECT group_concat(name_article), group_concat(price) FROM article;
+
+
+-- INNER JOIN  
+SELECT s.firstname_seller, s.lastname_seller, t.date_ticket
+FROM seller AS s
+INNER JOIN ticket AS t ON s.id_seller = t.id_seller;
+
+SELECT s.firstname_seller, s.lastname_seller, group_concat(t.date_ticket SEPARATOR " / ") 
+FROM seller AS s
+INNER JOIN ticket AS t ON s.id_seller = t.id_seller
+GROUP BY s.id_seller;
+
+-- 1
+SELECT c.lastname, c.firstname, group_concat(t.date_ticket SEPARATOR " - ") 
+FROM consumner AS c
+INNER JOIN ticket AS t ON c.id_consumner = t.id_consumner
+GROUP BY c.lastname;
+
+-- 2
+SELECT t.id_ticket, group_concat(a.name_article SEPARATOR " - ")
+FROM ticket AS t
+INNER JOIN ticket_article AS ta ON t.id_ticket = ta.id_ticket
+INNER JOIN article AS a ON ta.id_article = a.id_article
+GROUP BY t.id_ticket;
+
+-- 3
+SELECT s.lastname_seller, s.firstname_seller, group_concat(DISTINCT a.name_article SEPARATOR " / ")
+FROM seller AS s
+INNER JOIN ticket AS t ON s.id_seller = t.id_seller
+INNER JOIN ticket_article AS ta ON t.id_ticket = ta.id_ticket
+INNER JOIN article AS a ON ta.id_article = a .id_article
+GROUP BY s.lastname_seller;
+
+-- 4
+SELECT t.id_ticket, t.date_ticket, sum(a.price *ta.quantite) 
+FROM ticket AS t
+INNER JOIN ticket_article AS ta ON t.id_ticket = ta.id_ticket
+INNER JOIN article AS a ON ta.id_article = a.id_article
+GROUP BY t.id_ticket, t.date_ticket;
+
+-- 5
+SELECT group_concat(s.firstname_seller, ' - ', s.lastname_seller), c.lastname, c.firstname, t.date_ticket, group_concat(a.name_article SEPARATOR " / ") , a.price
+FROM seller s
+INNER JOIN ticket t ON s.id_seller = t.id_seller
+INNER JOIN consumner c ON t.id_consumner = c.id_consumner
+INNER JOIN ticket_article ta ON t.id_ticket = ta.id_ticket
+INNER JOIN article a ON ta.id_article = a.id_article
+GROUP BY t.id_ticket;
+
+-- LEFT ET RIGHT JOIN
+SELECT s.firstname_seller, s.lastname_seller, group_concat(t.date_ticket SEPARATOR ' / ') 
+FROM seller AS s
+LEFT JOIN ticket t ON s.id_seller = t.id_seller
+GROUP BY s.id_seller
+HAVING group_concat(t.date_ticket SEPARATOR ' / ') IS NULL;

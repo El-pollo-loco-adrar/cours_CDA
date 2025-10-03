@@ -31,3 +31,10 @@ CREATE TABLE IF NOT EXISTS message(
 	CONSTRAINT fk_message_author
 		FOREIGN KEY (id_author) REFERENCES users(id_user) ON DELETE CASCADE
 )ENGINE=InnoDB;
+
+
+-- s sender r receiver m mailbox
+SELECT r.email receveir, u.email sender, m.message, m.subject, m.date_message
+FROM mailbox m
+INNER JOIN users s ON s.id_user = m.id_sender 
+INNER JOIN users r ON r.id_user = m.id_receiver;
