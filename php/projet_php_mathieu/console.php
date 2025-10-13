@@ -19,6 +19,7 @@ NB : le script sera lancé comme ci-dessous :
 dans le terminal saisir :
 */
 
+
 $notes = [];
 function askNotes() : int{
     $nbrNotes = (int)readline("Combien de notes voulez-vous entrer ? ");

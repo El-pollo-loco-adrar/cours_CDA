@@ -77,3 +77,5 @@ Exercice 3 :
 
     $notes = [];
     $test = readline("Combien de notes voulez-vous entrer ? ");
+
+
